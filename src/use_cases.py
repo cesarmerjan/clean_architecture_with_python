@@ -24,7 +24,6 @@ def sign_in(
     try:
         user = User(**dataclasses.asdict(_input))
         with unit_of_work:
-            unit_of_work.repository: RepositoryInterface
             unit_of_work.repository.add(user)
             unit_of_work.commit()
         output = SignInOutput(user.name, user.email)
