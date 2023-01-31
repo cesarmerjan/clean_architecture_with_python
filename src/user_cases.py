@@ -2,13 +2,24 @@
 Responsible for managing interaction with the entities and the business rules.
 """
 import dataclasses
+import typing
 
 from src.entities import User
 from src.presenters import PresenterInterface
 from src.repositories import RepositoryInterface
-from src.schemas import SignInInput, SignInOutput
+from src.schemas import SignInInput, SignInOutput, Schema
 from src.units_of_work import UnitOfWorkInterface
 from src.views import View
+
+
+UseCase: typing.Callable[
+    [
+        UnitOfWorkInterface,
+        Schema,
+        PresenterInterface
+    ],
+    View
+]
 
 
 def sign_in(
