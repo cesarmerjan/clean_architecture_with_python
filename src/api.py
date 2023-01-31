@@ -6,8 +6,8 @@ import http
 import http.server
 import json
 
+from config import API_HOST, API_PORT
 from src.controllers import sign_in
-from config import API_PORT, API_HOST
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
