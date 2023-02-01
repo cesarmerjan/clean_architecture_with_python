@@ -17,13 +17,13 @@ Clean Architecture: A Craftsman's Guide to Software Structure and Design
 
 ## Use Cases
 ------------------
-### User Sign In
+### User Sign Up
 **input**: name, email, password
 **output**: name, email
 ##### Processing Steps
-1. Perform validation of the type of the submitted data.
-2. Check if there is any user in the system with the submitted email.
-3. If not, create a user in the system and persist it.
+1. Receive client data.
+2. Persist the data in the system.
+3. Inform the client if the sign up was successful.
 ------------------
 ## Commands
 #### Run the CLI

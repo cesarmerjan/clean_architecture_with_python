@@ -5,7 +5,7 @@ post:
 	@curl --header "Content-Type: application/json" \
   		--request POST \
   		--data '{"name":"user", "email": "user@email.com", "password":"h4rdT0gu3sS"}' \
-  		http://localhost:${PORT}/sign_in
+  		http://localhost:${PORT}/sign_up
 
 .PHONY: server
 server:

@@ -7,20 +7,13 @@ import http.server
 import json
 
 from config import API_HOST, API_PORT
-from src.controllers import sign_in
+from src.controllers import api_cli_sign_up
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
-    def _set_headers(self):
-        self.send_response(200)
-        self.send_header("Content-type", "application/json")
-        self.end_headers()
-
-    def do_HEAD(self):
-        self._set_headers()
 
     def do_POST(self):
-        if self.path == "/sign_in":
+        if self.path == "/sign_up":
             ctype, pdict = cgi.parse_header(self.headers.get("content-type"))
 
             if ctype != "application/json":
@@ -32,16 +25,15 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
             post_body = self.rfile.read(content_len)
             _json: str = json.loads(post_body.decode())
-            view = sign_in(**_json)
 
-            self._set_headers()
-            payload = json.dumps(view.data)
-            self.wfile.write(bytes(payload, "utf-8"))
+            view = api_cli_sign_up(**_json)
 
-            if view.is_successful:
-                self.send_response(http.HTTPStatus.CREATED)
-            else:
-                self.send_response(http.HTTPStatus.INTERNAL_SERVER_ERROR)
+            self.send_response(view.status_code)
+            for header in view.headers:
+                self.send_header(header[0], header[1])
+            self.end_headers()
+
+            self.wfile.write(bytes(view.body, "utf-8"))
 
 
 if __name__ == "__main__":

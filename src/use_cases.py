@@ -15,7 +15,7 @@ UseCaseInterface = typing.Callable[
 ]
 
 
-def sign_in(
+def sign_up(
     unit_of_work: UnitOfWorkInterface,
     _input: SignInInput,
     presenter: PresenterInterface,

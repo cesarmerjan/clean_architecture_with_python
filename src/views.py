@@ -2,6 +2,7 @@
 Responsible for defining how the data will be presented to the user.
 """
 import json
+import typing
 
 
 class View:
@@ -38,3 +39,15 @@ class TerminalJsonView(View):
 
     def __repr__(self) -> str:
         return self._message
+
+
+class HttpView(View):
+
+    def __init__(self,
+                 status_code: int,
+                 headers: typing.List[typing.Tuple[str, str]] = ([]),
+                 body: str = "",
+                 ) -> None:
+        self.status_code = status_code
+        self.headers = headers
+        self.body = body
