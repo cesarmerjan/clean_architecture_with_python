@@ -38,7 +38,7 @@ $ make server
 
 #### Make the shell
 ``` shell
-$ make post
+$ make shell
 ```
 
 #### Make an example post request

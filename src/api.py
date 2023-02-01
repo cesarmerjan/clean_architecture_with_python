@@ -36,9 +36,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(bytes(view.body, "utf-8"))
 
 
+def create_server(port: int, host: str) -> http.server.HTTPServer:
+    server = http.server.HTTPServer((port, host), Handler)
+    return server
+
+
 if __name__ == "__main__":
 
-    server = http.server.HTTPServer((API_HOST, API_PORT), Handler)
+    server = create_server(API_HOST, API_PORT)
 
     try:
         print(f"Server started at {API_PORT}")
